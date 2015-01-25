@@ -1,0 +1,59 @@
+<html>
+<title>yepee!!</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  
+  <style type="text/css">
+   button ,div.list {
+    position: relative;
+    left: 35%;
+    font-size: 1.5em;
+  }
+  form{
+    position: relative;
+    top: 13em;
+    left: 9%;
+  }
+    </style>
+  }
+  <div class="main_container">
+  <form>
+  
+  <div class="list">
+  {%for key in tag_dict%}
+      <input type="checkbox"id="{{key}}">{{key}}</input> 
+      </br>
+      <span id="result" name="result_List"></span>
+    {%endfor%}
+    </div>
+    <button id="but" >click here</button>
+    </form>
+    </div>
+    <script type="text/javascript">
+    var tags=[];
+    
+
+    $("button").click(function(){
+      var counter=0;
+      $("input").each(function(){
+        if(document.getElementById(this.id).checked==true)
+        tags[counter++]=this.id;
+      }); 
+    
+    
+  alert(tags)
+  tags.join(",")
+  $.ajax({
+  type: "POST",
+  url: "/submit",
+  data: {'user': tags.toString() }
+})
+  .done(function( tag ) {
+    alert( "Data Saved: " + tags );
+  });
+});
+
+    </script>
+</html>
+
+
+
